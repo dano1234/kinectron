@@ -56,13 +56,14 @@
 
 	  this.rgbCallback = null;
 	  this.depthCallback = null;
-	  //this.rawDepthCallback = null;
+	  this.rawDepthCallback = null;
 	  this.infraredCallback = null;
 	  this.leInfraredCallback = null; 
 	  this.bodiesCallback = null;
 	  this.trackedBodiesCallback = null;
 	  this.keyCallback = null;
 	  this.fhCallback = null;
+	  this.multiFrameCallback = null;
 
 	  // Peer variables 
 	  var peer = null;
@@ -182,26 +183,28 @@
 	        //   rawDepthCallback(processedData);
 	        // break;
 
-	        // case 'multiFrame':
-	        //   if (data.color) {
-	        //     this.img.src = data.color;
-	        //     this.rgbCallback(this.img);
-	        //   }
+	        case 'multiFrame':
+	          this.multiFrameCallback(data);
 
-	        //   if (data.depth) {
-	        //     this.img.src = data.depth;
-	        //     this.depthCallback(this.img);
-	        //   }
+	          // if (data.color) {
+	          //   this.img.src = data.color;
+	          //   this.rgbCallback(this.img);
+	          // }
 
-	        //   if (data.body) {
-	        //     this.bodyCallback(data.body);
-	        //   }
+	          // if (data.depth) {
+	          //   this.img.src = data.depth;
+	          //   this.depthCallback(this.img);
+	          // }
 
-	        //   if (data.rawDepth) {
-	        //     processedData = this._processRawDepth(data.rawDepth);
-	        //     rawDepthCallback(processedData);
-	        //   }
-	        // break;
+	          // if (data.body) {
+	          //   this.bodyCallback(data.body);
+	          // }
+
+	          // if (data.rawDepth) {
+	          //   processedData = this._processRawDepth(data.rawDepth);
+	          //   rawDepthCallback(processedData);
+	          // }
+	        break;
 	      }
 	    }.bind(this));
 	  };
@@ -254,10 +257,10 @@
 	    this._setFeed('skeleton');
 	  };
 
-	  // this.startMultiFrame = function(frames) {
-	      //if (callback) { this._sendToPeer('multi', frames); }
-	  //   
-	  // };
+	  this.startMultiFrame = function(frames) {
+	      if (callback) { this._sendToPeer('multi', frames); }
+	    
+	  };
 
 	  this.startKey = function(callback) {
 	    if (callback) {
@@ -320,6 +323,10 @@
 
 	  this.setFhCallback = function(callback) {
 	    this.fhCallback = callback;  
+	  };
+
+	  this.setMultiFrameCallback = function(callback) {
+	    this.multiFrameCallback = callback;
 	  };
 	  
 	  this.getJoints = function(callback) {
