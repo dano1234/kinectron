@@ -184,26 +184,26 @@
 	        // break;
 
 	        case 'multiFrame':
-	          this.multiFrameCallback(data);
+	          //this.multiFrameCallback(data);
 
-	          // if (data.color) {
-	          //   this.img.src = data.color;
-	          //   this.rgbCallback(this.img);
-	          // }
+	          if (data.color) {
+	            this.img.src = data.color;
+	            this.rgbCallback(this.img);
+	          }
 
-	          // if (data.depth) {
-	          //   this.img.src = data.depth;
-	          //   this.depthCallback(this.img);
-	          // }
+	          if (data.depth) {
+	            this.img.src = data.depth;
+	            this.depthCallback(this.img);
+	          }
 
-	          // if (data.body) {
-	          //   this.bodyCallback(data.body);
-	          // }
+	          if (data.body) {
+	            this.bodyCallback(data.body);
+	          }
 
-	          // if (data.rawDepth) {
-	          //   processedData = this._processRawDepth(data.rawDepth);
-	          //   rawDepthCallback(processedData);
-	          // }
+	          if (data.rawDepth) {
+	            processedData = this._processRawDepth(data.rawDepth);
+	            rawDepthCallback(processedData);
+	          }
 	        break;
 	      }
 	    }.bind(this));
@@ -258,7 +258,7 @@
 	  };
 
 	  this.startMultiFrame = function(frames) {
-	      if (callback) { this._sendToPeer('multi', frames); }
+	    this._sendToPeer('multi', frames);
 	    
 	  };
 
